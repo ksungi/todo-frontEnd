@@ -13,6 +13,7 @@ class Todo extends React.Component {
     deleteEventHandler = ()=>{
         this.delete(this.state.item);
     }
+    
     offReadOnlyMode = ()=>{
         this.setState({readOnly: false}, ()=>{
             console.log("ReadOnly? ", this.state.readOnly)
@@ -33,10 +34,11 @@ class Todo extends React.Component {
     }
 
     checkboxEventHandler = (e)=>{
-        console.log("CheckBox Event Call");
         const thisItem = this.state.item;
-        thisItem.done = thisItem.done ?false :true // bool값 반전
-        this.setState({item: thisItem});
+        thisItem.done = thisItem.done ? false : true; // bool값 반전
+        //this.setState({item: thisItem});
+        this.setState({readOnly: true});
+        this.update(this.state.item);
     }
 
     render() {

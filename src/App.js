@@ -38,7 +38,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.items);
     //조건문 (참이라면 && 이후 실행)
     var todoItems = this.state.items.length > 0 &&(
       <Paper style= {{margin:16}}>
