@@ -22,7 +22,7 @@ class Todo extends React.Component {
 
     enterKeyEventHandler = (e)=>{
         if(e.key === "Enter"){
-            this.setState({readOnly: true});
+            this.setState({readOnly:true});
             this.update(this.state.item);
         }
     }
@@ -37,7 +37,7 @@ class Todo extends React.Component {
         const thisItem = this.state.item;
         thisItem.done = thisItem.done ? false : true; // bool값 반전
         //this.setState({item: thisItem});
-        this.setState({readOnly: true});
+        this.setState({readOnly:true});
         this.update(this.state.item);
     }
 
