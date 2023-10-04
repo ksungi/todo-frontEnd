@@ -70,6 +70,7 @@ export function signup(userDTO) {
         if(error.status === 403) { 
             window.location.href = "/auth/signup"; 
         } 
+        
         return Promise.reject(error);
     });
 }
