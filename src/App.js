@@ -52,6 +52,7 @@ class App extends React.Component {
             this.delete(item);
         });
         this.setState([]);
+        this.setState({currnetPage: 1}); //현재 페이지를 1로 되돌림
       }
       alert("삭제되었습니다.");
     } else { alert("취소되었습니다."); }
@@ -117,7 +118,6 @@ class App extends React.Component {
         </Toolbar>
       </AppBar>
     );
-
     //loading 중이 아닐 때
     var todoListPage = (
       <div>
@@ -127,8 +127,14 @@ class App extends React.Component {
           <div className='TodoList'> {todoItems} </div>
         </Container>
         
-        {/* 페이징 */}
+        {/* 페이징과 버튼들 */}
         <div >
+          <Button onClick={() => {
+            if( CP > 1){
+              this.setState({currnetPage: CP-1});
+            }else{}
+          }}> ❮ </Button>
+
           {Array.from(
             { length: Math.ceil(this.state.items.length / this.state.itemsPerPage) }, 
             (v, i) => ( <Button key={i+1} 
@@ -137,6 +143,12 @@ class App extends React.Component {
                                 }
                         > {i+1} </Button> )
           )}
+
+          <Button onClick={() => {
+            if( CP > 0 && CP < this.state.items.length/IP){
+              this.setState({currnetPage: CP+1});
+            }else{}
+          }}> ❯ </Button>
         </div>
         
         {/* [선택/전체] 삭제 버튼 */}
