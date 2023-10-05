@@ -13,6 +13,8 @@ class App extends React.Component {
       items: [],
       /*로딩 중 이라는 상태를 표현할 변수 생성자에 상태 변수를 초기화*/
       loading: true,
+      currnetPage: 1,
+      itemsPerPage: 7,
     };
   }
 
@@ -73,11 +75,20 @@ class App extends React.Component {
 
 
   render() {
+    // *연산 불가한 관계로 다른 변수를 거쳐서 계산
+    const CP = this.state.currnetPage;
+    const IP = this.state.itemsPerPage;
+    //페이징 변수들
+    const indexOfLastItem = CP * IP; // 디폴트: 7
+    const indexOfFirstItem = indexOfLastItem - IP; // 배열은 0부터 시작이니까
+    const currentItems = this.state.items.slice(indexOfFirstItem, indexOfLastItem);
+                                        // Last 전에서 컷   /^0/--/1/--'''--/6/--/^7/
+    
     //조건문 (참이라면 && 이후 실행)
-    var todoItems = this.state.items.length > 0 &&(
+    var todoItems = currentItems.length > 0 &&(
       <Paper style= {{margin:16}}>
         <List>
-          {this.state.items.map( (item, idx) => (
+          {currentItems.map( (item, idx) => (
               <Todo item={item} key={item.id} delete={this.delete} update={this.update}/> 
           ))}
         </List>
@@ -115,6 +126,20 @@ class App extends React.Component {
           <AddTodo add = {this.add} />
           <div className='TodoList'> {todoItems} </div>
         </Container>
+        
+        {/* 페이징 */}
+        <div >
+          {Array.from(
+            { length: Math.ceil(this.state.items.length / this.state.itemsPerPage) }, 
+            (v, i) => ( <Button key={i+1} 
+                                onClick={() =>
+                                  this.setState({currnetPage: i+1})
+                                }
+                        > {i+1} </Button> )
+          )}
+        </div>
+        
+        {/* [선택/전체] 삭제 버튼 */}
         <Button onClick={this.handleDeleteSelectedAll}
                 variant="contained" 
                 color="primary"
@@ -127,7 +152,7 @@ class App extends React.Component {
                 style={{ marginLeft: '16px'}}> 초기화 </Button>
       </div>
     );
-    
+
     //loading 중일 때
     var loadingPage = <h1>로딩중...</h1>
     var content = loadingPage;
