@@ -3,7 +3,7 @@ import Todo from './Todo';
 import AddTodo from './AddTodo';
 import {Paper, List, Container, Grid, Button, AppBar, Toolbar, Typography} from "@material-ui/core";
 import './App.css';
-import { call, signout } from './service/ApiService';
+import { call, signout, userInfoSet_route } from './service/ApiService';
 
 
 class App extends React.Component {
@@ -60,20 +60,24 @@ class App extends React.Component {
       </Paper>
     );
     
+    const accessUsername = localStorage.getItem("ACCESS_USERNAME");
     //navigationBar
     var navigationBar = (
       <AppBar position="static">
         <Toolbar>
-          <Grid justify="space-between" container>
-            
-            <Grid item>
-              <Typography variant="h6"> 오늘의 할 일</Typography>
-            </Grid>
-            
-            <Grid item>
-              <Button color="inherit" onClick={signout}> logout </Button>
+          <Grid justify-content="space-between" alignItems="center" container>         
+            <Grid item xs={8}>
+              <Typography variant="h6"  align="left" > 오늘의 할 일 </Typography>
             </Grid>
 
+            <Grid item xs={2} alignContent="center" >
+              <Typography align="right" > {accessUsername}님 </Typography>
+            </Grid>
+
+            <Grid item xs={2}>
+              <Button color="inherit" onClick={userInfoSet_route}> 회원정보수정 </Button>
+              <Button color="inherit" onClick={signout}> 로그아웃 </Button>
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>

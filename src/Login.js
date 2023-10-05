@@ -10,6 +10,7 @@ class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        
         const data = new FormData(event.target);
         const email = data.get("email");
         const password = data.get("password");
