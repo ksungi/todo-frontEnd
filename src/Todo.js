@@ -5,7 +5,10 @@ import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 class Todo extends React.Component {
     constructor(props) {
         super(props);
-        this.state ={ item: props.item, readOnly: true}; //매개변수 item의 변수/값을 item에 대입
+        this.state ={ item: props.item, 
+                        readOnly: true,
+                        itemColor: "",
+                        itemTextDeco: "",}; //매개변수 item의 변수/값을 item에 대입
         this.delete = props.delete;
         this.update = props.update;
     }
@@ -39,6 +42,13 @@ class Todo extends React.Component {
         //this.setState({item: thisItem});
         this.setState({readOnly:true});
         this.update(this.state.item);
+        if(thisItem.done){
+            this.setState({itemColor: "#f4f4f4"});
+            this.setState({itemTextDeco: "line-through"}); 
+        }else {
+            this.setState({itemColor: ""});
+            this.setState({itemTextDeco: ""}); 
+        }
     }
 
     render() {
@@ -53,6 +63,11 @@ class Todo extends React.Component {
                     value={item.title} multiline={true} fullWidth={true}
                     onClick={this.offReadOnlyMode} onChange={this.editEventHandler}
                     onKeyPress={this.enterKeyEventHandler}
+                    style={{background: this.state.itemColor, 
+                            textDecoration: this.state.itemTextDeco,
+                            borderRadius: 10,
+                            alignSelf: "flex-start"}}
+                            //텍스트 길이 만큼 배경을 넣으려 했으나 grid에서는 작동하지 않음
                     />
                 </ListItemText>
                 <ListItemSecondaryAction>

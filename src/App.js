@@ -83,7 +83,7 @@ class App extends React.Component {
     const indexOfLastItem = CP * IP; // 디폴트: 7
     const indexOfFirstItem = indexOfLastItem - IP; // 배열은 0부터 시작이니까
     const currentItems = this.state.items.slice(indexOfFirstItem, indexOfLastItem);
-                                        // Last 전에서 컷   /^0/--/1/--'''--/6/--/^7/
+                                        // Last(7) 전에서 컷   ^/0/--/1/--'''--/6/--^/7/
     
     //조건문 (참이라면 && 이후 실행)
     var todoItems = currentItems.length > 0 &&(
@@ -118,6 +118,8 @@ class App extends React.Component {
         </Toolbar>
       </AppBar>
     );
+
+
     //loading 중이 아닐 때
     var todoListPage = (
       <div>
