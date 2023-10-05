@@ -6,6 +6,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.state={ showPassword: false };
     }
 
     handleSubmit(event) {
@@ -20,7 +21,9 @@ class Login extends React.Component {
     }
 
     render() {
+        const showpassword = this.state.showPassword;
         return (
+            
             <Container component="main" maxWidth="xs" style={ {marginTop: "8%"} }>
                 <Grid container spacing={2}>
                     <Typography component="h1" variant="h5">
@@ -32,7 +35,7 @@ class Login extends React.Component {
                     { /*submit버튼을 누르면 handleSubmit이 실행됨*/}
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <TextField variant="outlined"
+                            <TextField  variant="outlined"
                                         required fullWidth
                                         id="email"
                                         label="이메일 주소"
@@ -40,7 +43,9 @@ class Login extends React.Component {
                                         autoComplete="email"/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField variant="outlined"
+                            {/* 비밀번호 가림 ON/OFF 토글 넣지 못함 */}
+                            <TextField  type={ showpassword ? "text" : "password" }
+                                        variant="outlined"
                                         required fullWidth
                                         id="password"
                                         label="패스워드"

@@ -139,7 +139,8 @@ class App extends React.Component {
 
           {Array.from(
             { length: Math.ceil(this.state.items.length / this.state.itemsPerPage) }, 
-            (v, i) => ( <Button key={i+1} 
+            (v, i) => ( <Button key={i+1}
+                                // 현재 페이지 번호 강조넣어보자
                                 onClick={() =>
                                   this.setState({currnetPage: i+1})
                                 }
