@@ -41,6 +41,30 @@ class App extends React.Component {
       );
   }
 
+  //전체삭제
+  handleDeleteAll = (item)=> {
+    if(window.confirm("모든 목록이 삭제됩니다. 하시겠습니까?")) {
+      
+      if(this.state.items.length > 0){
+            this.state.items.map( (item, idx)=>{
+            this.delete(item);
+        });
+        this.setState([]);
+      }
+      alert("삭제되었습니다.");
+    } else { alert("취소되었습니다."); }
+  }
+  
+  //선택삭제
+  handleDeleteSelectedAll = (item)=> {
+    this.state.items.map( (item, idx)=>{
+      if(item.done === true){
+        this.delete(item);
+      }
+    });
+    this.setState([]);
+  }
+
   // useEffect() {
   //   call("/todo", "GET", null).then((response) => {
   //     this.setState({items: response.data});
@@ -71,7 +95,7 @@ class App extends React.Component {
             </Grid>
 
             <Grid item xs={2} alignContent="center" >
-              <Typography align="right" > {accessUsername}님 </Typography>
+              <Typography align="right" > [ {accessUsername} ] </Typography>
             </Grid>
 
             <Grid item xs={2}>
@@ -91,6 +115,16 @@ class App extends React.Component {
           <AddTodo add = {this.add} />
           <div className='TodoList'> {todoItems} </div>
         </Container>
+        <Button onClick={this.handleDeleteSelectedAll}
+                variant="contained" 
+                color="primary"
+                size="medium"
+                style={{ marginLeft: '16px' }}> 선택 삭제 </Button>
+        <Button onClick={this.handleDeleteAll}
+                variant="contained" 
+                color="secondary"
+                size="medium"
+                style={{ marginLeft: '16px'}}> 초기화 </Button>
       </div>
     );
     

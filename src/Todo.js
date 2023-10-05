@@ -47,7 +47,8 @@ class Todo extends React.Component {
             <ListItem>
                 <Checkbox checked={item.done} onChange={this.checkboxEventHandler}/>
                 <ListItemText>
-                    <InputBase inputProps={{"aria-label":"naked", readOnly: this.state.readOnly}}
+                    <InputBase 
+                    inputProps={{"aria-label":"naked", readOnly: this.state.readOnly}}
                     type="text" id="{item.id}" name="{item.id}"
                     value={item.title} multiline={true} fullWidth={true}
                     onClick={this.offReadOnlyMode} onChange={this.editEventHandler}
