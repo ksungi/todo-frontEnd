@@ -3,12 +3,7 @@ import { TextField, Paper, Button, Grid }from "@material-ui/core";
 
 function AddTodo( {add} ) {
     const [item, setItem] = useState( {title: ""} );
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {item: {title:""}};
-    //     this.add = props.add; //props의 함수를 this.add에 연결
-    //     // 상위 컴포넌트(App.js)의 함수, 매개변수가 들어있음
-    // }
+
     const onInputChange = (e)=>{
         const thisItem = {...item};
         thisItem.title = e.target.value;
