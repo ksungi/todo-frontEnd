@@ -14,7 +14,7 @@ class Todo extends React.Component {
     }
 
     deleteEventHandler = ()=>{
-        this.delete(this.state.item);
+        this.delete(this.state.item); 
     }
     
     offReadOnlyMode = ()=>{
